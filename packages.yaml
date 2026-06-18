@@ -1,0 +1,112 @@
+packages:
+  - name: stow
+    pacman: stow
+    apt: stow
+    dnf: stow
+    zypper: stow
+    brew: stow
+    aur: stow
+
+  - name: neovim
+    pacman: neovim
+    apt: neovim
+    dnf: neovim
+    brew: neovim
+    aur: neovim
+
+  - name: vim
+    pacman: vim
+    apt: vim
+    dnf: vim
+    brew: vim
+    aur: vim
+
+  - name: git
+    pacman: git
+    apt: git
+    dnf: git
+    brew: git
+    aur: git
+
+  - name: python
+    pacman: python
+    apt: python3
+    dnf: python3
+    brew: python
+    aur: python
+
+  - name: java
+    pacman: jdk-openjdk
+    apt: default-jdk
+    dnf: java-21-openjdk
+
+  - name: maven
+    pacman: maven
+    apt: maven
+    dnf: maven
+    brew: maven
+    aur: maven
+
+  - name: docker
+    pacman: docker
+    apt: docker-ce
+    dnf: docker-ce
+
+  - name: node
+    pacman: nodejs
+    apt: nodejs
+    dnf: nodejs
+    brew: node
+
+  - name: go
+    pacman: go
+    apt: golang
+    dnf: golang
+    brew: go
+    aur: go
+
+  - name: htop
+    pacman: htop
+    apt: htop
+    dnf: htop
+    brew: htop
+    aur: htop
+
+  - name: timeshift
+    pacman: timeshift
+    apt: timeshift
+    dnf: timeshift
+    aur: timeshift
+
+  - name: vlc
+    pacman: vlc
+    apt: vlc
+    dnf: vlc
+    brew: vlc
+    aur: vlc
+
+  - name: easyeffects
+    pacman: easyeffects
+    apt: easyeffects
+    dnf: easyeffects
+
+  - name: ffmpeg
+    pacman: ffmpeg
+    apt: ffmpeg
+    dnf: ffmpeg
+    brew: ffmpeg
+    aur: ffmpeg-full-git
+
+  - name: x264
+    pacman: x264
+    apt: libx264-dev
+    dnf: x264-devel
+    brew: x264
+    aur: x264-git
+
+  - name: x265
+    pacman: x265
+    apt: libx265-dev
+    dnf: x265
+    brew: x265
+    aur: x265
