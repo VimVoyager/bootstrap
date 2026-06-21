@@ -42,3 +42,18 @@ ensure_python3() {
     *)      die "Don't know how to install python3 for package manager '$pm'" ;;
   esac
 }
+
+# Adds a repo from a .repo file URL via `dnf config-manager`, using
+# whichever syntax this system's dnf actually understands. Don't assume
+# based on Fedora version — some images (e.g. minimal cloud boxes) don't
+# necessarily match what the "Fedora 41+ = dnf5" rule of thumb predicts.
+dnf_add_repofile() {
+  local url="$1"
+  if dnf --version 2>/dev/null | head -1 | grep -q '^dnf5'; then
+    sudo dnf install -y dnf5-plugins
+    sudo dnf config-manager addrepo --from-repofile="$url"
+  else
+    sudo dnf install -y dnf-plugins-core
+    sudo dnf config-manager --add-repo "$url"
+  fi
+}

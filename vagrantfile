@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
     "arch"     => "generic/arch",      # pacman — archlinux/archlinux has no libvirt build
     "debian"   => "generic/debian12",  # apt
     "fedora"   => "generic/fedora39",  # dnf
-    "opensuse" => "generic/opensuse15" # zypper
+    "opensuse" => "generic/opensuse16" # zypper
   }
 
   boxes.each do |name, box|

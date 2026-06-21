@@ -35,6 +35,16 @@ Architectures: $(dpkg --print-architecture)
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
       sudo apt-get update -qq
+
+      if [[ ! -f /etc/apt/sources.list.d/mullvad.list ]]; then
+        info "Adding Mullvad repo..."
+        sudo apt-get install -y curl
+        sudo curl -fsSLo /usr/share/keyrings/mullvad-keyring.asc https://repository.mullvad.net/deb/mullvad-keyring.asc
+        echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$(dpkg --print-architecture)] https://repository.mullvad.net/deb/stable stable main" | sudo tee /etc/apt/sources.list.d/mullvad.list
+        sudo apt-get update -qq
+      else
+        info "Mullvad repo already configured — skipping"
+      fi
       ;;
     dnf)
       if dnf repolist 2>/dev/null | grep -qi rpmfusion; then
@@ -52,10 +62,16 @@ EOF
         info "Docker CE repo already configured — skipping."
       else
         info "Adding Docker CE repo..."
-        sudo dnf install -y dnf-plugins-core
-        sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+        dnf_add_repofile "https://download.docker.com/linux/fedora/docker-ce.repo"
       fi
-      ;;	    
+
+      if dnf repolist 2>/dev/null | grep -qi mullvad; then
+        info "Mullvad repo already configured — skipping."
+      else
+        info "Adding Mullvad repo..."
+        dnf_add_repofile "https://repository.mullvad.net/rpm/stable/mullvad.repo"
+      fi
+      ;;
     zypper)
       if zypper lr 2>/dev/null | grep -qi packman; then
         info "Packman repo already enabled — skipping."
@@ -72,8 +88,15 @@ EOF
       sudo zypper addrepo -cfp 90 "$repo_url" packman
       sudo zypper --gpg-auto-import-keys refresh
       ;;
+    pacman)
+      info "Initializing pacman keyring..."
+      sudo pacman-key --init
+      sudo pacman-key --populate archlinux
+      sudo pacman -Syy archlinux-keyring
+      sudo pacman -Syu
+      ;;
     *)
-      : # pacman and brew don't need anything extra for these packages
+      : # apt and brew don't need anything extra for these packages
       ;;
   esac
 }

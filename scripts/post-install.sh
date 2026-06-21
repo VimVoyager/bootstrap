@@ -71,9 +71,9 @@ else
           warn "flatpak not installed — skipping $target. Add a 'flatpak' entry to packages.yaml."
           continue
         fi
-	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
         info "Installing $target via flatpak..."
-        flatpak install -y --noninteractive flathub "$target"
+        flatpak install -y --user --noninteractive flathub "$target"
         ;;
       snap)
         if ! command -v snap &>/dev/null; then

@@ -154,3 +154,50 @@ packages:
   - name: jetbrains-toolbox
     method: script
     target: scripts/install-jetbrains-toolbox.sh
+
+  - name: mullvad-vpn
+    apt: mullvad-vpn
+    dnf: mullvad-vpn
+    aur: mullvad-vpn
+
+  - name: mullvad-browser
+    apt: mullvad-browser
+    dnf: mullvad-browser
+    aur: mullvad-browser-bin
+
+  - name: mullvad-browser
+    method: script
+    target: scripts/install-mullvad-browser-fallback.sh
+
+  - name: protonmail-bridge
+    pacman: protonmail-bridge
+
+  - name: protonmail-bridge
+    method: script
+    target: scripts/install-protonmail-bridge.sh
+
+  - name: thunderbird
+    pacman: thunderbird
+    apt: thunderbird
+    dnf: thunderbird
+    zypper: MozillaThunderbird
+    brew: thunderbird
+
+  - name: nextcloud-client
+    pacman: nextcloud-client
+    apt: nextcloud-desktop
+    dnf: nextcloud-client
+    zypper: nextcloud-client
+    brew: nextcloud
+
+  - name: bitwarden
+    pacman: bitwarden
+
+  - name: bitwarden
+    method: script
+    target: scripts/install-bitwarden-fallback.sh
+
+  - name: proton-pass
+    method: script
+    target: scripts/install-proton-pass.sh
+
