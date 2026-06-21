@@ -5,6 +5,7 @@ BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$BOOTSTRAP_DIR/scripts/detect-pm.sh"
 source "$BOOTSTRAP_DIR/scripts/utils.sh"
+source "$BOOTSTRAP_DIR/scripts/repos.sh"
 
 PM=$(detect_pm)
 
@@ -16,6 +17,7 @@ fi
 info "Detected package manager: $PM"
 info "Starting bootstrap..."
 
+setup_extra_repos "$PM"
 bash "$BOOTSTRAP_DIR/scripts/install-pkgs.sh" "$PM"
 bash "$BOOTSTRAP_DIR/scripts/symlinks.sh"
 bash "$BOOTSTRAP_DIR/scripts/ssh-setup.sh"

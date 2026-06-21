@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCD[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 source "$SCRIPT_DIR/utils.sh"
@@ -15,7 +15,7 @@ fi
 # The yaml parser below shells out to python3 - make sure it exists first.
 ensure_python3 "$PM"
 
-PACKAGES_FILE="ROOT_DIR/packages.yaml"
+PACKAGES_FILE="$ROOT_DIR/packages.yaml"
 
 YAY_AVAILABLE=0
 if [[ "$PM" == "pacman" ]] && command -v yay &>/dev/null; then

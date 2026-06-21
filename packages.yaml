@@ -1,16 +1,9 @@
 packages:
-  - name: stow
-    pacman: stow
-    apt: stow
-    dnf: stow
-    zypper: stow
-    brew: stow
-    aur: stow
-
   - name: neovim
     pacman: neovim
     apt: neovim
     dnf: neovim
+    zypper: neovim
     brew: neovim
     aur: neovim
 
@@ -18,6 +11,7 @@ packages:
     pacman: vim
     apt: vim
     dnf: vim
+    zypper: vim
     brew: vim
     aur: vim
 
@@ -25,6 +19,7 @@ packages:
     pacman: git
     apt: git
     dnf: git
+    zypper: git
     brew: git
     aur: git
 
@@ -32,6 +27,7 @@ packages:
     pacman: python
     apt: python3
     dnf: python3
+    zypper: python3
     brew: python
     aur: python
 
@@ -39,11 +35,13 @@ packages:
     pacman: jdk-openjdk
     apt: default-jdk
     dnf: java-21-openjdk
+    zypper: java-21-openjdk
 
   - name: maven
     pacman: maven
     apt: maven
     dnf: maven
+    zypper: maven
     brew: maven
     aur: maven
 
@@ -51,17 +49,40 @@ packages:
     pacman: docker
     apt: docker-ce
     dnf: docker-ce
+    zypper: docker
+
+  - name: docker-cli
+    apt: docker-ce-cli
+    dnf: docker-ce-cli
+
+  - name: containerd.io
+    apt: containerd.io
+    dnf: containerd.io
+
+  - name: docker-buildx
+    pacman: docker-buildx
+    apt: docker-buildx-plugin
+    dnf: docker-buildx-plugin
+    zypper: docker-buildx
+
+  - name: docker-compose
+    pacman: docker-compose
+    apt: docker-compose-plugin
+    dnf: docker-compose-plugin
+    zypper: docker-compose
 
   - name: node
     pacman: nodejs
     apt: nodejs
     dnf: nodejs
+    zypper: nodejs
     brew: node
 
   - name: go
     pacman: go
     apt: golang
     dnf: golang
+    zypper: go
     brew: go
     aur: go
 
@@ -69,6 +90,7 @@ packages:
     pacman: htop
     apt: htop
     dnf: htop
+    zypper: htop
     brew: htop
     aur: htop
 
@@ -76,12 +98,14 @@ packages:
     pacman: timeshift
     apt: timeshift
     dnf: timeshift
+    zypper: timeshift
     aur: timeshift
 
   - name: vlc
     pacman: vlc
     apt: vlc
     dnf: vlc
+    zypper: vlc
     brew: vlc
     aur: vlc
 
@@ -89,11 +113,13 @@ packages:
     pacman: easyeffects
     apt: easyeffects
     dnf: easyeffects
+    zypper: easyeffects
 
   - name: ffmpeg
     pacman: ffmpeg
     apt: ffmpeg
     dnf: ffmpeg
+    zypper: ffmpeg
     brew: ffmpeg
     aur: ffmpeg-full-git
 
@@ -101,6 +127,7 @@ packages:
     pacman: x264
     apt: libx264-dev
     dnf: x264-devel
+    zypper: libx264-devel
     brew: x264
     aur: x264-git
 
@@ -108,5 +135,22 @@ packages:
     pacman: x265
     apt: libx265-dev
     dnf: x265
+    zypper: libx265-devel
     brew: x265
     aur: x265
+
+  - name: ufw
+    pacman: ufw
+    apt: ufw
+    dnf: ufw
+    zypper: ufw
+
+  - name: flatpak
+    pacman: flatpak
+    apt: flatpak
+    dnf: flatpak
+    zypper: flatpak
+
+  - name: jetbrains-toolbox
+    method: script
+    target: scripts/install-jetbrains-toolbox.sh

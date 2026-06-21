@@ -1,0 +1,50 @@
+# Multi-distro test rig for this bootstrap repo.
+#
+# Usage:
+#   vagrant up arch              # boot just the Arch box
+#   vagrant ssh arch
+#     $ cd /vagrant && bash install.sh
+#
+#   vagrant up                   # boot all four
+#   vagrant destroy -f arch      # tear one down when you're done with it
+#
+# Requires the vagrant-libvirt provider (matches CachyOS/KVM nicely —
+# see the README for the one-time host setup). If you'd rather use
+# VirtualBox, drop the `node.vm.provider :libvirt` block and swap in
+# `node.vm.provider :virtualbox`.
+
+Vagrant.configure("2") do |config|
+  # Mount this repo into every VM at /vagrant via rsync (not NFS/virtualbox
+  # shared folders) so it works the same regardless of provider.
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
+  boxes = {
+    "arch"     => "generic/arch",      # pacman — archlinux/archlinux has no libvirt build
+    "debian"   => "generic/debian12",  # apt
+    "fedora"   => "generic/fedora39",  # dnf
+    "opensuse" => "generic/opensuse15" # zypper
+  }
+
+  boxes.each do |name, box|
+    config.vm.define name do |node|
+      node.vm.box = box
+      node.vm.hostname = "bootstrap-#{name}"
+
+      node.vm.provider :libvirt do |lv|
+        lv.memory = 2048
+        lv.cpus = 2
+        # Use the QEMU guest agent for IP detection instead of the fog
+        # libvirt_ip_command path. Without this, a version mismatch between
+        # vagrant-libvirt and the bundled fog-libvirt drops the IP command
+        # silently and falls back to a 2-second wait_for — killing the boot
+        # before the VM can get a DHCP lease.
+        lv.qemu_use_agent = true
+        # Give slower first-boots (initial pacman -Syu etc.) plenty of time.
+      end
+
+      # Keep this empty — see the usage note above. Provisioning
+      # automatically hides failures; running install.sh by hand over SSH
+      # makes it much easier to see exactly which step broke.
+    end
+  end
+end
